@@ -25,7 +25,11 @@ import Resendotprouter from "./Routers/ResendOtp.js"
 const server = express()
 server.use(express.json())
 server.use(cors({
-  origin: "http://localhost:5173", 
+    origin: [
+    "http://localhost:5173",
+    "https://taskforge.vercel.app"
+  ], 
+  
   credentials: true
 }));
 server.use(cookieParser())
@@ -48,4 +52,8 @@ server.use("/", deleterouter)
 server.use("/", savechangesrouter)
 server.use("/", Resendotprouter)
 
-server.listen(5000)
+const PORT = process.env.PORT || 5000;
+
+server.listen(PORT, () => {
+  console.log("Server running on", PORT);
+});
