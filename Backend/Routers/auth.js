@@ -25,7 +25,7 @@ secure: true,
       maxAge: 5 * 24 * 60 * 60 * 1000
     })
 
-    res.redirect("http://task-mng-app.vercel.app/home")
+   res.redirect("https://task-mng-app.vercel.app/")
 
 })
 export default authrouter
