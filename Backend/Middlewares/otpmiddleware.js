@@ -23,6 +23,7 @@ const hashed = await bcrypt.hash(req.body.pass, 10)
         next()
 
     } catch (error) {
+        console.log("🔥 EMAIL ERROR FULL:", error);
         res.json({
             success:false,
             msg:"server side error ki bajah se otp send nahi ho paygi"
