@@ -14,7 +14,7 @@ Resendotprouter.post("/resendotp",async(req,res)=>{
             })
         }
         const otp = await Math.floor(100000+Math.random()*900000)
-              await transport.sendMail({
+               transport.sendMail({
                     from:process.env.gmail,
                     to:req.body.email,
                     subject:"Otp Verification From TODO",
