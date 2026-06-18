@@ -40,7 +40,7 @@ function validateForm() {
         if (!validateForm()) return;
         setLoading(true);
         try {
-            const api = await fetch("http://task-management-app-qd5u.onrender.com/login",{
+            const api = await fetch("https://task-management-app-qd5u.onrender.com/login",{
                 method:"POST",
                 credentials:"include",
                 headers:{
@@ -100,7 +100,7 @@ setLoading(false);
     }));
 }
     function google() {
-      window.location.href = "http://task-management-app-qd5u.onrender.com/auth/google"
+      window.location.href = "https://task-management-app-qd5u.onrender.com/auth/google"
     }
 
   return (

@@ -117,7 +117,7 @@ async function logout() {
     try {
 
         const api = await fetch(
-            "http://task-management-app-qd5u.onrender.com/logout",
+            "https://task-management-app-qd5u.onrender.com/logout",
             {
                 method: "POST",
                 credentials: "include",
@@ -147,7 +147,7 @@ async function logout() {
     async function createtask() {
         try {
             const token = localStorage.getItem("token");
-            const api = await fetch("http://task-management-app-qd5u.onrender.com/createtask", {
+            const api = await fetch("https://task-management-app-qd5u.onrender.com/createtask", {
                 method: "POST",
                 headers: { "Content-Type": "application/json", authorization: token },
                 body: JSON.stringify(taskinfo),
@@ -204,7 +204,7 @@ async function logout() {
         setLoading(true);
         try {
             const token = localStorage.getItem("token");
-            const api = await fetch("http://task-management-app-qd5u.onrender.com/gettasks", {
+            const api = await fetch("https://task-management-app-qd5u.onrender.com/gettasks", {
                 method: "POST",
                 headers: { authorization: token },
             });
@@ -245,7 +245,7 @@ async function logout() {
 
     async function findusername() {
         try {
-            const api = await fetch("http://task-management-app-qd5u.onrender.com/me", {
+            const api = await fetch("https://task-management-app-qd5u.onrender.com/me", {
                 method: "POST",
                 credentials: "include",
             });

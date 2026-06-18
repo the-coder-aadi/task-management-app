@@ -8,7 +8,7 @@ function Resetpass() {
 
     async function passwordreset() {
         try {
-            const api = await fetch("http://task-management-app-qd5u.onrender.com/resetpass",{
+            const api = await fetch("https://task-management-app-qd5u.onrender.com/resetpass",{
                 method:"POST",
                 headers:{
                     "Content-Type":"application/json"

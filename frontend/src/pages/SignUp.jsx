@@ -68,7 +68,7 @@ function handleform(e) {
 
     setLoading(true);
         try {
-            const api = await fetch("http://task-management-app-qd5u.onrender.com/signup",{
+            const api = await fetch("https://task-management-app-qd5u.onrender.com/signup",{
                 method:"POST",
                 headers:{
                     "Content-Type":"application/json"
@@ -110,7 +110,7 @@ function handleform(e) {
 }
     }
        function google() {
-      window.location.href = "http://task-management-app-qd5u.onrender.com/auth/google"
+      window.location.href = "https://task-management-app-qd5u.onrender.com/auth/google"
     }
     
   return (
