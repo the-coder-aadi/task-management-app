@@ -4,8 +4,8 @@ logoutrouter.post("/logout",(req,res)=>{
     try {
    res.clearCookie("refresh-token",{
     httpOnly:true,
-    secure:false,
-    sameSite:"lax"
+     sameSite: "none",
+  secure: true
    })
    res.json({
     success:true,
