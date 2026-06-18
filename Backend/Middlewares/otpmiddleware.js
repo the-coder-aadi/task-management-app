@@ -5,12 +5,14 @@ async function otpmiddleware(req,res,next) {
     try {
         const otp = await Math.floor(100000+Math.random()*900000)
 const hashed = await bcrypt.hash(req.body.pass, 10)
-        await transport.sendMail({
-            from:process.env.gmail,
-            to:req.body.email,
-            subject:"Otp Verification From TODO",
-           html:`<h1>${otp}</h1>`
-        })
+transport.sendMail({
+  from: process.env.gmail,
+  to: req.body.email,
+  subject: "OTP",
+  html: `<h1>${otp}</h1>`
+}).catch(err => {
+  console.log("EMAIL FAILED:", err);
+});
 
         await otpmodel.create({
             email:req.body.email,
