@@ -5,7 +5,7 @@ async function otpmiddleware(req,res,next) {
     try {
         const otp = await Math.floor(100000+Math.random()*900000)
 const hashed = await bcrypt.hash(req.body.pass, 10)
-         transport.sendMail({
+        await transport.sendMail({
             from:process.env.gmail,
             to:req.body.email,
             subject:"Otp Verification From TODO",
