@@ -19,8 +19,8 @@ refreshtokencheck.post("/refreshtokenverification",RefreshCheck,(req,res)=>{
 
         res.cookie("refresh-token",newrefreshtoken,{
             httpOnly:true,
-            secure:false,
-            sameSite:"lax",
+        sameSite: "none",
+secure: true,
             maxAge: 5 * 24 * 60 * 60 * 1000
         })
 

@@ -5,7 +5,7 @@ const [email, setemail] = useState("")
 const navigate = useNavigate()
   async function forgotpass() {
     try {
-      const api = await fetch("http://localhost:5000/forgotpass",{
+      const api = await fetch("http://task-management-app-qd5u.onrender.com/forgotpass",{
         method:"POST",
         headers:{
           "Content-Type":"application/json"

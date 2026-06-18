@@ -19,7 +19,7 @@ if (!finduser) {
 }
 
 const token =  crypto.randomBytes(32).toString("hex")
-const resetLink = `http://localhost:5173/reset-password/${token}`;
+const resetLink = `http://task-mng-app.vercel.app/reset-password/${token}`;
 
 
 finduser.resettoken = token

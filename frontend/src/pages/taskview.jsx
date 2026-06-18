@@ -51,7 +51,7 @@ const [editTask, setEditTask] = useState({
 
     async function taskfetch() {
         try {
-            const api = await fetch(`http://localhost:5000/task/${id}`);
+            const api = await fetch(`http://task-management-app-qd5u.onrender.com/task/${id}`);
             const res = await api.json();
             if (res.success) {
                 setTask(res.task);
@@ -130,7 +130,7 @@ const [editTask, setEditTask] = useState({
     async function handledelete() {
         const token = localStorage.getItem("token")
         try {
-            const api = await fetch(`http://localhost:5000/delete/${Task._id}`,{
+            const api = await fetch(`http://task-management-app-qd5u.onrender.com/delete/${Task._id}`,{
                 method:"DELETE",
                     headers: {
                     authorization: token,
@@ -174,7 +174,7 @@ const [editTask, setEditTask] = useState({
     async function savechanges() {
         const token = localStorage.getItem("token")
         try {
-            const api = await fetch(`http://localhost:5000/savechanges/${id}`,{
+            const api = await fetch(`http://task-management-app-qd5u.onrender.com/savechanges/${id}`,{
                 method:'put',
                 headers:{
                     "Content-Type":"application/json",

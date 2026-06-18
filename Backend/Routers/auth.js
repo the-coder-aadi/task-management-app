@@ -20,12 +20,12 @@ authrouter.get("/auth/google/callback", passport.authenticate("google",{
 
         res.cookie("refresh-token", token, {
       httpOnly: true,
-      sameSite: "lax",
-      secure: false,
+  sameSite: "none",
+secure: true,
       maxAge: 5 * 24 * 60 * 60 * 1000
     })
 
-    res.redirect("http://localhost:5173/home")
+    res.redirect("http://task-mng-app.vercel.app/home")
 
 })
 export default authrouter

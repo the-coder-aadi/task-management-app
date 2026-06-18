@@ -27,8 +27,8 @@ try {
 
      res.cookie("refresh-token", Refreshtoken,{
         httpOnly:true,
-        secure:false,
-        sameSite: "lax",
+      sameSite: "none",
+secure: true,
         maxAge: 5 * 24 * 60 * 60 * 1000
     })
 

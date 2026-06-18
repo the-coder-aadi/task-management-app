@@ -27,7 +27,7 @@ server.use(express.json())
 server.use(cors({
     origin: [
     "http://localhost:5173",
-    "https://taskforge.vercel.app"
+    "https://task-mng-app.vercel.app"
   ], 
   
   credentials: true

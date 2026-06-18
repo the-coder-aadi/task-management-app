@@ -82,7 +82,7 @@ useEffect(() => {
 
     try {
 
-        const api = await fetch("http://localhost:5000/otp", {
+        const api = await fetch("http://task-management-app-qd5u.onrender.com/otp", {
             method: "POST",
             headers: {
                 "Content-Type": "application/json"
@@ -121,7 +121,7 @@ async function resendotp() {
 
     try {
         setResendLoading(true);
-        const api = await fetch("http://localhost:5000/resendotp", {
+        const api = await fetch("http://task-management-app-qd5u.onrender.com/resendotp", {
             method: "POST",
             headers: {
                 "Content-Type": "application/json"
