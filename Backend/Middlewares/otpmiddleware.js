@@ -6,37 +6,46 @@ async function otpmiddleware(req,res,next) {
         const otp = await Math.floor(100000+Math.random()*900000)
 const hashed = await bcrypt.hash(req.body.pass, 10)
 await transport.emails.send({
-  from: "TaskForge <onboarding@resend.dev>",
+  from: "TaskForge Security <onboarding@resend.dev>",
   to: req.body.email,
-  subject: "Verify your TaskForge account",
+  subject: `Your TaskForge verification code: ${otp}`,
+  text: `Your TaskForge verification code is ${otp}. This code expires in 1 minute. If you did not request this, please ignore this email.`,
   html: `
-    <div style="font-family: Arial, sans-serif; padding: 20px; background:#f8fafc;">
+    <div style="font-family: Arial, sans-serif; background:#ffffff; padding:24px; color:#111827;">
       
-      <div style="max-width:500px; margin:auto; background:white; padding:30px; border-radius:12px; box-shadow:0 4px 10px rgba(0,0,0,0.08);">
+      <div style="max-width:520px; margin:auto; border:1px solid #e5e7eb; border-radius:10px; padding:28px;">
         
-        <h1 style="color:#2563eb; text-align:center; margin-bottom:10px;">
-          TaskForge
-        </h1>
+        <h2 style="margin:0 0 16px 0;">
+          TaskForge Account Verification
+        </h2>
 
-        <p style="font-size:16px; color:#334155;">
+        <p style="font-size:15px; line-height:1.6;">
           Hello,
         </p>
 
-        <p style="font-size:15px; color:#475569;">
-          Use the OTP below to verify your account:
+        <p style="font-size:15px; line-height:1.6;">
+          Use the verification code below to complete your sign up.
         </p>
 
-        <div style="text-align:center; margin:30px 0;">
-          <span style="font-size:32px; font-weight:bold; letter-spacing:6px; color:#111827;">
+        <div style="margin:24px 0; text-align:center;">
+          <div style="font-size:30px; font-weight:700; letter-spacing:5px;">
             ${otp}
-          </span>
+          </div>
         </div>
 
-        <p style="font-size:14px; color:#64748b;">
-          This OTP is valid for 1 minute.
+        <p style="font-size:14px; line-height:1.6; color:#4b5563;">
+          This code will expire in 1 minute.
         </p>
 
+        <p style="font-size:14px; line-height:1.6; color:#4b5563;">
+          If you did not request this email, you can safely ignore it.
+        </p>
 
+        <hr style="margin:24px 0; border:none; border-top:1px solid #e5e7eb;" />
+
+        <p style="font-size:12px; color:#6b7280;">
+          TaskForge Security Team
+        </p>
 
       </div>
     </div>
