@@ -1,6 +1,6 @@
 import express from "express"
 import otpmodel from "../models/otpmodel.js"
-import apiInstance from "../transport.js"
+import client from "../transport.js"
 const Resendotprouter = express.Router()
 Resendotprouter.post("/resendotp",async(req,res)=>{
     try {
@@ -14,7 +14,7 @@ Resendotprouter.post("/resendotp",async(req,res)=>{
             })
         }
         const otp = await Math.floor(100000+Math.random()*900000)
-await apiInstance.sendTransacEmail({
+await client.sendTransacEmail({
   sender: {
     name: "TaskForge",
     email: "codearscommunity@gmail.com"

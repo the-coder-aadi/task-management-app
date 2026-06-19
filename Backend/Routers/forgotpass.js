@@ -1,6 +1,6 @@
 import express from "express"
 import usermodel from "../models/model.js"
-import apiInstance from "../transport.js"
+import client from "../transport.js"
 import crypto from "crypto"
 
 const forgotrouter = express.Router()
@@ -27,7 +27,7 @@ finduser.exptime = Date.now() + 2 * 60 * 1000
 
 await finduser.save()
 
-await apiInstance.sendTransacEmail({
+await client.sendTransacEmail({
   sender: {
     name: "TaskForge",
     email: "codearscommunity@gmail.com"
