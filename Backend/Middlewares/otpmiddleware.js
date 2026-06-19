@@ -5,11 +5,14 @@ async function otpmiddleware(req,res,next) {
     try {
         const otp = await Math.floor(100000+Math.random()*900000)
 const hashed = await bcrypt.hash(req.body.pass, 10)
-await transport.sendMail({
-  from: "TaskForge <codearscommunity@gmail.com>",
-  to: req.body.email,
+await transport.sendTransacEmail({
+  sender: {
+    name: "TaskForge",
+    email: "codearscommunity@gmail.com"
+  },
+  to: [{ email: req.body.email }],
   subject: "Verify your TaskForge account",
-  html: `<h1>${otp}</h1>`
+  htmlContent: `<h1>${otp}</h1>`
 })
 
         await otpmodel.create({

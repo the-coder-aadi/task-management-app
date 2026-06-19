@@ -27,11 +27,14 @@ finduser.exptime = Date.now() + 2 * 60 * 1000
 
 await finduser.save()
 
-await transport.sendMail({
-  from: "TaskForge <codearscommunity@gmail.com>",
-  to: req.body.email,
+await transport.sendTransacEmail({
+  sender: {
+    name: "TaskForge",
+    email: "codearscommunity@gmail.com"
+  },
+  to: [{ email: req.body.email }],
   subject: "Verify your TaskForge account",
-  html: `<h1>${otp}</h1>`
+  htmlContent: `<h1>${otp}</h1>`
 })
 
 res.json({

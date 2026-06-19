@@ -1,13 +1,10 @@
-import nodemailer from "nodemailer"
+import Brevo from "@getbrevo/brevo"
 
-const transport = nodemailer.createTransport({
-  host: "smtp-relay.brevo.com",
-  port: 587,
-  secure: false,
-  auth: {
-    user: process.env.BREVO_EMAIL,
-    pass: process.env.BREVO_SMTP_KEY
-  }
-})
+const client = new Brevo.TransactionalEmailsApi()
 
-export default transport
+client.setApiKey(
+  Brevo.TransactionalEmailsApiApiKeys.apiKey,
+  process.env.BREVO_API_KEY
+)
+
+export default client

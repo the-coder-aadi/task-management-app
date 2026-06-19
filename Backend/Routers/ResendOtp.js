@@ -14,11 +14,14 @@ Resendotprouter.post("/resendotp",async(req,res)=>{
             })
         }
         const otp = await Math.floor(100000+Math.random()*900000)
-    await transport.sendMail({
-  from: "TaskForge <codearscommunity@gmail.com>",
-  to: req.body.email,
+await transport.sendTransacEmail({
+  sender: {
+    name: "TaskForge",
+    email: "codearscommunity@gmail.com"
+  },
+  to: [{ email: req.body.email }],
   subject: "Verify your TaskForge account",
-  html: `<h1>${otp}</h1>`
+  htmlContent: `<h1>${otp}</h1>`
 })
 
         finduser.otp = otp
