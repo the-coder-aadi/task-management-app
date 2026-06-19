@@ -1,10 +1,8 @@
 import * as Brevo from "@getbrevo/brevo"
 
-const apiInstance = new Brevo.TransactionalEmailsApi()
+const client = new Brevo.TransactionalEmailsApi()
 
-apiInstance.setApiKey(
-  Brevo.TransactionalEmailsApiApiKeys.apiKey,
-  process.env.BREVO_API_KEY
-)
+// 🔥 IMPORTANT FIX (this is the correct way now)
+client.setApiKey(process.env.BREVO_API_KEY)
 
-export default apiInstance
+export default client
