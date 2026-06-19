@@ -1,6 +1,6 @@
 import express from "express"
 import usermodel from "../models/model.js"
-import client from "../transport.js"
+import sendEmail from "../transport.js"
 import crypto from "crypto"
 
 const forgotrouter = express.Router()
@@ -27,14 +27,10 @@ finduser.exptime = Date.now() + 2 * 60 * 1000
 
 await finduser.save()
 
-await client.sendTransacEmail({
-  sender: {
-    name: "TaskForge",
-    email: "codearscommunity@gmail.com"
-  },
-  to: [{ email: req.body.email }],
-  subject: "Verify your TaskForge account",
-  htmlContent: `<h1>${otp}</h1>`
+await sendEmail({
+  to: req.body.email,
+  subject: "Reset Password",
+  html: `<a href="${resetLink}">Reset Password</a>`
 })
 
 res.json({

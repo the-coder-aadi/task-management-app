@@ -1,8 +1,30 @@
-import * as Brevo from "@getbrevo/brevo"
+const BREVO_API_KEY = process.env.BREVO_API_KEY
 
-const client = new Brevo.TransactionalEmailsApi()
+async function sendEmail({ to, subject, html }) {
+  const res = await fetch("https://api.brevo.com/v3/smtp/email", {
+    method: "POST",
+    headers: {
+      "api-key": BREVO_API_KEY,
+      "content-type": "application/json",
+      "accept": "application/json"
+    },
+    body: JSON.stringify({
+      sender: {
+        name: "TaskForge",
+        email: "codearscommunity@gmail.com"
+      },
+      to: [{ email: to }],
+      subject,
+      htmlContent: html
+    })
+  })
 
-// 🔥 IMPORTANT FIX (this is the correct way now)
-client.setApiKey(process.env.BREVO_API_KEY)
+  if (!res.ok) {
+    const err = await res.text()
+    throw new Error(err)
+  }
 
-export default client
+  return res.json()
+}
+
+export default sendEmail

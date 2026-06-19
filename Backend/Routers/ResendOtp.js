@@ -1,6 +1,6 @@
 import express from "express"
 import otpmodel from "../models/otpmodel.js"
-import client from "../transport.js"
+import sendEmail from "../transport.js"
 const Resendotprouter = express.Router()
 Resendotprouter.post("/resendotp",async(req,res)=>{
     try {
@@ -14,15 +14,12 @@ Resendotprouter.post("/resendotp",async(req,res)=>{
             })
         }
         const otp = await Math.floor(100000+Math.random()*900000)
-await client.sendTransacEmail({
-  sender: {
-    name: "TaskForge",
-    email: "codearscommunity@gmail.com"
-  },
-  to: [{ email: req.body.email }],
-  subject: "Verify your TaskForge account",
-  htmlContent: `<h1>${otp}</h1>`
-})
+        
+    await sendEmail({
+      to: req.body.email,
+      subject: "Verify your TaskForge account",
+      html: `<h1>${otp}</h1>`
+    })
 
         finduser.otp = otp
         finduser.otpExpiresAt = new Date(Date.now() + 60 * 1000)
