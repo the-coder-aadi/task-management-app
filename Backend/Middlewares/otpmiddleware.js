@@ -1,11 +1,12 @@
-import transport from "../transport.js";
+import apiInstance from "../transport.js";
+
 import otpmodel from "../models/otpmodel.js";
 import bcrypt from "bcrypt"
 async function otpmiddleware(req,res,next) {
     try {
         const otp = await Math.floor(100000+Math.random()*900000)
 const hashed = await bcrypt.hash(req.body.pass, 10)
-await transport.sendTransacEmail({
+await apiInstance.sendTransacEmail({
   sender: {
     name: "TaskForge",
     email: "codearscommunity@gmail.com"
