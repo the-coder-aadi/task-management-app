@@ -27,15 +27,33 @@ finduser.exptime = Date.now() + 2 * 60 * 1000
 
 await finduser.save()
 
-await transport.sendMail({
-  from:process.env.gmail,
-  to:req.body.email,
-  subject:"Reset link for Forgot password in TODO",
-    html: `
-    <p>You requested password reset</p>
-    <a href="${resetLink}">Click here to reset password</a>
+await transport.emails.send({
+  from: "TaskForge <onboarding@resend.dev>",
+  to: req.body.email,
+  subject: "Reset your TaskForge password",
+  html: `
+    <div style="font-family: Arial, sans-serif; padding:20px; background:#f8fafc;">
+      <div style="max-width:500px; margin:auto; background:white; padding:30px; border-radius:12px;">
+        
+        <h1 style="color:#2563eb; text-align:center;">TaskForge</h1>
+
+        <p>You requested a password reset.</p>
+
+        <p>Click the button below to reset your password:</p>
+
+        <div style="text-align:center; margin:30px 0;">
+          <a href="${resetLink}"
+             style="background:#2563eb; color:white; padding:12px 20px; text-decoration:none; border-radius:8px;">
+             Reset Password
+          </a>
+        </div>
+
+        <p>This link will expire in 2 minutes.</p>
+
+      </div>
+    </div>
   `
-})
+});
 
 res.json({
     success:true,
