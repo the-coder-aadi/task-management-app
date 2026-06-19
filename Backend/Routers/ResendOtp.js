@@ -45,11 +45,6 @@ Resendotprouter.post("/resendotp",async(req,res)=>{
           This OTP is valid for 1 minute.
         </p>
 
-        <hr style="margin:20px 0; border:none; border-top:1px solid #e2e8f0;" />
-
-        <p style="font-size:12px; color:#94a3b8; text-align:center;">
-          This email was sent by TaskForge.
-        </p>
 
       </div>
     </div>
