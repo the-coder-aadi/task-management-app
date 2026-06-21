@@ -1,6 +1,7 @@
 import { useState, useEffect } from "react"
 import { useNavigate } from "react-router-dom";
 import { Navigate } from "react-router-dom"
+import HomeSkeleton from "./HomeSkeleton";
 
 function ProtectedRoute({ children }) {
     const navigate = useNavigate()
@@ -70,7 +71,7 @@ function ProtectedRoute({ children }) {
     }
 
     if (loading) {
-        return <h1>Loading...</h1>
+        return <HomeSkeleton />
     }
     if (!isauth) {
         return <Navigate to="/" />

@@ -11,10 +11,6 @@ const verify = await otpmodel.findOne({
 })
 
 if (verify) {
-    res.json({
-        success:true,
-        msg:"otp verify successfully"
-    })
 
     await usermodel.create({
         name:verify.name,
@@ -25,6 +21,11 @@ if (verify) {
       await otpmodel.deleteOne({
         _id: verify._id
     });
+
+        res.json({
+        success:true,
+        msg:"otp verify successfully"
+    })
 
 }
     res.json({

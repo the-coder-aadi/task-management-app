@@ -74,7 +74,7 @@ function Resetpass() {
         </button>
 
         {/* Footer */}
-        <p className="text-center text-sm text-gray-500 mt-5">
+        <p className="text-center text-sm text-blue-800 mt-5">
           Make sure your password is strong & secure
         </p>
 

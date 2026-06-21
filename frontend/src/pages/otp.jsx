@@ -135,9 +135,9 @@ async function resendotp() {
             setTimer(60); // timer restart
                 setSuccessMsg("OTP sent successfully ✅");
 
-    setTimeout(() => {
-        setSuccessMsg("");
-    }, 3000);
+    // setTimeout(() => {
+    //     setSuccessMsg("");
+    // }, 3000);
         }
 
         console.log(res);
