@@ -16,7 +16,7 @@ try {
     const Accesstoken =  jwt.sign(
         {id: req.data._id, name:req.data.name},
         process.env.access_token,
-        {expiresIn:"5m"}
+        {expiresIn:"30m"}
     )
 
         const Refreshtoken =  jwt.sign(

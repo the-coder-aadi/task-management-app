@@ -8,7 +8,7 @@ refreshtokencheck.post("/refreshtokenverification",RefreshCheck,(req,res)=>{
         const newaccesstoken = jwt.sign(
             {id:req.user.id, name:req.user.name},
             process.env.access_token,
-            {expiresIn:"5m"}
+            {expiresIn:"30m"}
         )
 
              const newrefreshtoken = jwt.sign(
