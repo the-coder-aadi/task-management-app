@@ -23,6 +23,9 @@ import taskviewrouter from "./Routers/taskview.js"
 import deleterouter from "./Routers/delete.js"
 import savechangesrouter from "./Routers/savechanges.js"
 import Resendotprouter from "./Routers/ResendOtp.js"
+import { connectRedis } from "./Routers/redis.js"
+
+connectRedis()
 const server = express()
 server.use(express.json())
 server.use(cors({

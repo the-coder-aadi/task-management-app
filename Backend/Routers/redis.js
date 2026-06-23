@@ -1,20 +1,23 @@
-import dotenv from "dotenv"
-dotenv.config()
-
 import { createClient } from "redis"
 
-console.log("REDIS URL:", process.env.REDIS_URL)
-
 const client = createClient({
-    url: process.env.REDIS_URL
+    url: process.env.REDIS_URL,
+    socket: {
+        reconnectStrategy: false
+    }
 })
 
 client.on("error", (err) => {
-    console.log("Redis Error:", err)
+    console.log("Redis Error:", err.message)
 })
 
-await client.connect()
-
-console.log("Redis connected successfully")
+export async function connectRedis() {
+    try {
+        await client.connect()
+        console.log("Redis connected successfully")
+    } catch (error) {
+        console.log("Redis connection failed:", error.message)
+    }
+}
 
 export default client
