@@ -43,6 +43,8 @@ otpverirouter.post("/otp", async (req, res) => {
             success:false,
             msg:"error aa raha hai server side se otp verify karne par"
         })
+        console.log("otp verify par error",error);
+        
     }
 })
 
