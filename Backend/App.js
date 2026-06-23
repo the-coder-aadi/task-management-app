@@ -28,6 +28,7 @@ server.use(express.json())
 server.use(cors({
     origin: [
     "http://localhost:5173",
+    "http://localhost:5174",
     "https://task-mng-app.vercel.app"
   ], 
   
