@@ -16,7 +16,7 @@ otpverirouter.post("/otp", async (req, res) => {
             })
         }
 
-        const parsedData = JSON.parse(verify)
+        const parsedData = verify
 
         if (parsedData.otp != req.body.otp) {
             return res.json({
