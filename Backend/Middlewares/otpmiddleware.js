@@ -33,6 +33,7 @@ const hashed = await bcrypt.hash(req.body.pass, 10)
         EX: 60
     }
 )
+console.log("OTP saved in Redis")
         next()
 
     } catch (error) {
