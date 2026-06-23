@@ -81,14 +81,15 @@ useEffect(() => {
     setLoading(true);
 
     try {
-
+ const email = localStorage.getItem("email");
         const api = await fetch("https://task-management-app-qd5u.onrender.com/otp", {
             method: "POST",
             headers: {
                 "Content-Type": "application/json"
             },
             body: JSON.stringify({
-                otp: finalOtp
+                otp: finalOtp,
+                email:email
             })
         });
 

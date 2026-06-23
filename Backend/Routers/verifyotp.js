@@ -1,44 +1,49 @@
 import express from "express"
-import otpmodel from "../models/otpmodel.js"
 import usermodel from "../models/model.js"
+import client from "./redis.js"
 
 const otpverirouter = express.Router()
-otpverirouter.post("/otp",async(req,res)=>{
+
+otpverirouter.post("/otp", async (req, res) => {
     try {
-const verify = await otpmodel.findOne({
-   otp: req.body.otp,
-    otpExpiresAt: {$gt: new Date()}
-})
 
-if (verify) {
+        const verify = await client.get(req.body.email)
 
-    await usermodel.create({
-        name:verify.name,
-        email:verify.email,
-        pass:verify.pass
-    })
+        if (!verify) {
+            return res.json({
+                success:false,
+                msg:"otp expired"
+            })
+        }
 
-      await otpmodel.deleteOne({
-        _id: verify._id
-    });
+        const parsedData = JSON.parse(verify)
 
-        res.json({
-        success:true,
-        msg:"otp verify successfully"
-    })
+        if (parsedData.otp != req.body.otp) {
+            return res.json({
+                success:false,
+                msg:"otp invalid"
+            })
+        }
 
-}
-    res.json({
-        success:false,
-        msg:"otp invalid"
-    })
-}
- catch (error) {
+        await usermodel.create({
+            name: parsedData.name,
+            email: req.body.email,
+            pass: parsedData.pass
+        })
+
+        await client.del(req.body.email)
+
+        return res.json({
+            success:true,
+            msg:"otp verify successfully"
+        })
+
+    } catch (error) {
         res.json({
             success:false,
             msg:"error aa raha hai server side se otp verify karne par"
         })
     }
-
 })
+
 export default otpverirouter

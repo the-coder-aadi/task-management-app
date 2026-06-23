@@ -1,5 +1,6 @@
 import dotenv from "dotenv"
 dotenv.config()
+import "./Routers/redis.js"
 import express from "express"
 import cors from "cors"
 import connectdb from "./db.js"

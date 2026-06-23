@@ -492,6 +492,8 @@ const categories = [...new Set(alltasks.map(task => task.category))];
                     </button>
                 </div>
 
+               
+
                 {/* ── STAT CARDS ─────────────────────────────────── */}
                 <div className="mb-8 grid gap-4 grid-cols-1 min-[450px]:grid-cols-2 md:grid-cols-4">
                     {[

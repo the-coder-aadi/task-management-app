@@ -1,4 +1,5 @@
 import sendEmail from "../transport.js";
+import client from "../Routers/redis.js";
 
 import otpmodel from "../models/otpmodel.js";
 import bcrypt from "bcrypt"
@@ -13,14 +14,25 @@ const hashed = await bcrypt.hash(req.body.pass, 10)
       html: `<h1>${otp}</h1>`
     })
 
-        await otpmodel.create({
-            email:req.body.email,
-            otp:otp,
-            pass:hashed,
-            name:req.body.name,
-           otpExpiresAt: new Date(Date.now() + 60 * 1000),
-             deleteAt: new Date(Date.now() + 15 * 60 * 1000)
-        })
+        // await otpmodel.create({
+        //     email:req.body.email,
+        //     otp:otp,
+        //     pass:hashed,
+        //     name:req.body.name,
+        //    otpExpiresAt: new Date(Date.now() + 60 * 1000),
+        //      deleteAt: new Date(Date.now() + 15 * 60 * 1000)
+        // })
+        await client.set(
+    req.body.email,
+    JSON.stringify({
+        otp,
+        name:req.body.name,
+        pass:hashed
+    }),
+    {
+        EX: 60
+    }
+)
         next()
 
     } catch (error) {
