@@ -37,6 +37,7 @@ const location = useLocation();
 const [taskDeletedMsg, setTaskDeletedMsg] = useState(false);
 const [deletedTaskName, setDeletedTaskName] = useState("");
 const [logoutPop, setLogoutPop] = useState(false);
+const [creatingTask, setCreatingTask] = useState(false);
 
 
 useEffect(() => {
@@ -145,6 +146,9 @@ async function logout() {
     }
 
     async function createtask() {
+            if (creatingTask) return
+
+    setCreatingTask(true)
         try {
             const token = localStorage.getItem("token");
             const api = await fetch("https://task-management-app-qd5u.onrender.com/createtask", {
@@ -178,7 +182,10 @@ async function logout() {
             }
         } catch (error) {
             console.log(error);
-        }
+        }finally {
+        setCreatingTask(false); // 
+    }
+
     }
 
     // async function refreshtokenverification() {
@@ -201,6 +208,7 @@ async function logout() {
     // }
 
     async function gettasks() {
+      
         setLoading(true);
         try {
             const token = localStorage.getItem("token");
@@ -1061,12 +1069,17 @@ const categories = [...new Set(alltasks.map(task => task.category))];
                             >
                                 Cancel
                             </button>
-                            <button
-                                onClick={createtask}
-                                className="flex-1 rounded-xl bg-blue-600 py-2.5 text-sm font-semibold text-white transition hover:bg-blue-700 hover:shadow-lg hover:shadow-blue-200"
-                            >
-                                Create Task
-                            </button>
+                         <button
+    onClick={createtask}
+    disabled={creatingTask}
+    className={`flex-1 rounded-xl py-2.5 text-sm font-semibold text-white transition
+        ${creatingTask 
+            ? "bg-blue-400 cursor-not-allowed" 
+            : "bg-blue-600 hover:bg-blue-700 hover:shadow-lg hover:shadow-blue-200"
+        }`}
+>
+    {creatingTask ? "Creating..." : "Create Task"}
+</button>
                         </div>
                     </div>
                 </div>
