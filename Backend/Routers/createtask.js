@@ -3,7 +3,6 @@ import taskmodel from "../models/taskmodel.js"
 import validator from "../Middlewares/expressvelidation.js"
 import { body } from "express-validator"
 import jwt from "jsonwebtoken"
-import client from "./redis.js"
 const createtaskrouter = express.Router()
 createtaskrouter.post("/createtask",
     [
@@ -52,16 +51,11 @@ body("duedate")
                 category: req.body.category,
                 user: verify.id
             })
-            
-             await client.del(`task:${verify.id}`)
-
             res.json({
                 success: true,
                 msg: "task create ho chuka hai db mai"
 
             })
-
-           
 
         } catch (error) {
             if (error.name === "TokenExpiredError") {

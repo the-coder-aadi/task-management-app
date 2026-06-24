@@ -215,8 +215,6 @@ async function logout() {
             }
             const res = await api.json();
             if (res.success) setalltasks(res.tasks);
-            console.log(res);
-            
         } catch (error) {
             console.log(error);
         }finally {
