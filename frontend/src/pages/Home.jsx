@@ -76,7 +76,7 @@ useEffect(() => {
     return searchMatch && categoryMatch && statusmatch && prioritymatch;
 });
 
-    const displayedTasks = showAllTasks ? filteredTasks : filteredTasks.slice(0, 4);
+    const displayedTasks = showAllTasks ? filteredTasks : filteredTasks.slice(0, 6);
 
     const [taskinfo, settaskinfo] = useState({
         title: "",
