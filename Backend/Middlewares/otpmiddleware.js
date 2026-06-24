@@ -44,7 +44,7 @@ if (existing) {
 )
 
 await client.set(
-    `rate_limit:${req.body.email}`,
+    `otp_limit:${req.body.email}`,
     "sent",
     {
         ex:60
