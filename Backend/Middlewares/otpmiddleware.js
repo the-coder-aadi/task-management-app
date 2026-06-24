@@ -63,7 +63,7 @@ await client.set(
 
 await client.incr(ipKey);
 
-await client.expire(ipKey,600);
+await client.expire(ipKey,300);
 
 console.log("OTP saved in Redis")
         next()
