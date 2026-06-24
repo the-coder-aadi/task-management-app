@@ -312,7 +312,7 @@ async function logout() {
 
     const completionPct = totalTasks > 0 ? Math.round((completedTasks / totalTasks) * 100) : 0;
 
-    const showSidebarCards = displayedTasks.length >= 6;
+    const showSidebarCards = displayedTasks.length >= 7;
 
     const hour = new Date().getHours();
 
