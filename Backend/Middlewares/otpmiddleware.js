@@ -8,6 +8,15 @@ async function otpmiddleware(req,res,next) {
         const otp = await Math.floor(100000+Math.random()*900000)
 const hashed = await bcrypt.hash(req.body.pass, 10)
 
+const existing = await client.get(`otp_limit:${req.body.email}`)
+
+if (existing) {
+    return res.json({
+        success:false,
+        msg:"wait for 1 min"
+    })
+}
+
    await sendEmail({
       to: req.body.email,
       subject: "Verify your TaskForge account",
@@ -33,6 +42,15 @@ const hashed = await bcrypt.hash(req.body.pass, 10)
         ex: 60
     }
 )
+
+await client.set(
+    `rate_limit:${req.body.email}`,
+    "sent",
+    {
+        ex:60
+    }
+)
+
 console.log("OTP saved in Redis")
         next()
 
