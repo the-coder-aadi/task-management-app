@@ -20,7 +20,7 @@ if (existing) {
     })
 }
 
-if (count && Number(count) >= 5) {
+if (count && Number(count) >= 3) {
   return res.json({
     success:false,
     msg:"Too many OTP requests from your IP"
