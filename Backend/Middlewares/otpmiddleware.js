@@ -9,12 +9,22 @@ async function otpmiddleware(req,res,next) {
 const hashed = await bcrypt.hash(req.body.pass, 10)
 
 const existing = await client.get(`otp_limit:${req.body.email}`)
+const ipKey = `otp_ip:${req.ip}`;
+
+const count = await client.get(ipKey);
 
 if (existing) {
     return res.json({
         success:false,
         msg:"wait for 1 min"
     })
+}
+
+if (count && Number(count) >= 5) {
+  return res.json({
+    success:false,
+    msg:"Too many OTP requests from your IP"
+  });
 }
 
    await sendEmail({
@@ -50,6 +60,10 @@ await client.set(
         ex:60
     }
 )
+
+await client.incr(ipKey);
+
+await client.expire(ipKey,600);
 
 console.log("OTP saved in Redis")
         next()
