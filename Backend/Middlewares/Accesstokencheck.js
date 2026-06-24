@@ -11,6 +11,7 @@ async function Accesstokencheck(req, res, next) {
            }
        
    const verify = jwt.verify(token, process.env.access_token)
+   req.data = verify
    next()
 
        } catch (error) {

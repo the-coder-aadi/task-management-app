@@ -3,6 +3,7 @@ import taskmodel from "../models/taskmodel.js"
 import Accesstokencheck from "../Middlewares/Accesstokencheck.js"
 import validator from "../Middlewares/expressvelidation.js"
 import { body } from "express-validator"
+import client from "./redis.js"
 const savechangesrouter = express.Router()
 savechangesrouter.put("/savechanges/:id",
         [
@@ -37,11 +38,14 @@ try {
         returnDocument: "after"
     }
     )
+      const userId = req.user.id 
+     await client.del(`task:${userId}`)
     res.json({
         success:true,
               task:findandupdate,
         msg:"task update ho chuka hai..."
     })
+
 } catch (error) {
         res.json({
         success:false,
